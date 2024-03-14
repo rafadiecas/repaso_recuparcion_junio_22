@@ -8,6 +8,10 @@ public class Empleado {
     private String dni;
     private TipoEmpleado tipoEmpleado;
 
+    public Empleado(TipoEmpleado tipoEmpleado, int i, String s) {
+
+    }
+
     public Double getSalario() {
         return salario;
     }

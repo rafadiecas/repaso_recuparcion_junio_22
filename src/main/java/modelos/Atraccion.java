@@ -19,6 +19,15 @@ public class Atraccion {
     public Atraccion() {
     }
 
+    public Atraccion(TipoAtraccion tipoAtraccion) {
+        this.tipo = tipoAtraccion;
+    }
+
+    public Atraccion(TipoAtraccion tipoAtraccion, double v) {
+        this.tipo = tipoAtraccion;
+        this.alturaMinima = v;
+    }
+
     public int getId() {
         return id;
     }

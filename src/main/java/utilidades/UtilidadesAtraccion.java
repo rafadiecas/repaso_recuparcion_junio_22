@@ -37,7 +37,7 @@ public class UtilidadesAtraccion {
      * @return
      */
 
-    public List<Atraccion> getAtraccionesComunes(ParqueTematico parqueTematico1, ParqueTematico parqueTematico2){
+    public static List<Atraccion> getAtraccionesComunes(ParqueTematico parqueTematico1, ParqueTematico parqueTematico2){
         return parqueTematico1.getAtracciones().stream().filter(a->parqueTematico2.getAtracciones().contains(a)).collect(Collectors.toList());
     }
 
@@ -65,7 +65,7 @@ public class UtilidadesAtraccion {
      * @param parqueTematico2
      * @return
      */
-    public List<Atraccion> getAtraccionesExclusivasParque1(ParqueTematico parqueTematico1, ParqueTematico parqueTematico2){
+    public static List<Atraccion> getAtraccionesExclusivasParque1(ParqueTematico parqueTematico1, ParqueTematico parqueTematico2){
         return parqueTematico1.getAtracciones().stream().filter(a->!parqueTematico2.getAtracciones().contains(a)).collect(Collectors.toList());
     }
 
@@ -79,7 +79,7 @@ public class UtilidadesAtraccion {
      *
      * @return
      */
-    List<Atraccion> getAtraccionesConRestricciones(List<Atraccion> atracciones){
+    public static List<Atraccion> getAtraccionesConRestricciones(List<Atraccion> atracciones){
         return atracciones.stream().filter(a->a.getAlturaMinima()>1.2 && a.getAlturaMinima()<1.6 && !a.getTipo().equals(TipoAtraccion.INFANTIL)).collect(Collectors.toList());
     }
 

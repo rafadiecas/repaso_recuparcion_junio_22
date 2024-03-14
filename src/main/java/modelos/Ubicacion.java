@@ -17,6 +17,9 @@ public class Ubicacion {
         this.direccion = direccion;
     }
 
+    public Ubicacion(int i) {
+    }
+
 
     public Integer getCodigoPostal() {
         return codigoPostal;

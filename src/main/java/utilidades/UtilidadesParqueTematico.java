@@ -23,7 +23,7 @@ public class UtilidadesParqueTematico {
     public static List<ParqueTematico> getParquesConAtraccionesInfantiles(List<ParqueTematico> parqueTematicos){
 
 
-        return  new ArrayList<>();
+        return  parqueTematicos.stream().filter(p-> p.getAtracciones().stream().anyMatch(a -> a.getTipo().equals(TipoAtraccion.INFANTIL))).collect(Collectors.toList());
     }
 
 
@@ -42,7 +42,7 @@ public class UtilidadesParqueTematico {
      */
 
     public static List<ParqueTematico> getParquesPorUbicacionAdultos(List<ParqueTematico> parqueTematicos, Integer codigoPostal){
-        return new ArrayList<>();
+        return parqueTematicos.stream().filter(p->p.getUbicacion().getCodigoPostal().equals(codigoPostal) && p.getAtracciones().stream().anyMatch(a->a.getTipo().equals(TipoAtraccion.ADULTOS))).collect(Collectors.toList());
     }
 
     /**
@@ -55,22 +55,48 @@ public class UtilidadesParqueTematico {
      * @param presupuesto
      * @return
      */
-    public static List<ParqueTematico> getPosibles(List<ParqueTematico> parqueTematicos,
-                                                   Map<TipoPersona, Integer> mapa, Double presupuesto){
+    public static List<ParqueTematico> getPosibles(List<ParqueTematico> parqueTematicos, Map<TipoPersona, Integer> mapa, Double presupuesto){
 
+        List<ParqueTematico> parques = new ArrayList<>();
+        Double dinero = 0.0;
 
-        return new ArrayList<>();
+        for (ParqueTematico p:parqueTematicos){
+            dinero = presupuesto;
+
+            for (Tarifa t : p.getTarifas()){
+                if (mapa.containsKey(t.getTipo())){
+                    dinero -= t.getPrecio()*mapa.get(t.getTipo());
+                }
+            }
+
+            if (dinero>=0.0){
+                parques.add(p);
+            }
+
+        }
+
+        return parques;
     }
 
 
 
 
+    /**
+     *
+     * Ejercicio 6
+     *
+     * Devuelvo el precio total de las entradas para el parque temático pasado, teniendo en cuenta el tipo de persona
+     *
+     * @param parqueTematico
+     * @param numeroPersonas
+     * @param tipoPersona
+     * @return
+     */
+
+    public static Double calcularPrecioParquePorTipoPersona(TipoPersona tipoPersona, Integer numeroPersonas, ParqueTematico parqueTematico){
 
 
-    private static Double calcularPrecioParquePorTipoPersona(TipoPersona tipoPersona, Integer numeroPersonas, ParqueTematico parqueTematico){
-
-
-        return 0D;
+        return parqueTematico.getTarifas().stream().filter(t->t.getTipo().equals(tipoPersona)).findFirst().get().getPrecio()*numeroPersonas;
 
     }
 
