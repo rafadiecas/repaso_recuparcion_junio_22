@@ -22,6 +22,8 @@ public class UtilidadesParqueTematico {
      */
     public static List<ParqueTematico> getParquesConAtraccionesInfantiles(List<ParqueTematico> parqueTematicos){
 
+        //parqueTematicos.stream().flatMap(p->p.getAtracciones().stream()).filter(a->a.getTipo().equals(TipoAtraccion.ADULTOS));
+        //esto seria para usar el flatmap para unir todas las atracciones de todos los parques en una sola lista, es necesario el stream para filtrarlas luego
 
         return  parqueTematicos.stream().filter(p-> p.getAtracciones().stream().anyMatch(a -> a.getTipo().equals(TipoAtraccion.INFANTIL))).collect(Collectors.toList());
     }
